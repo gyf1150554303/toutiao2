@@ -1,13 +1,11 @@
 import Vue from "vue";
-import VueRouter from "vue-router";
-@import './icon.less';
+import Vuex from "vuex";
 
-Vue.use(VueRouter);
+Vue.use(Vuex);
 
-const routes = [];
-
-const router = new VueRouter({
-  routes,
+export default new Vuex.Store({
+  state: {},
+  mutations: {},
+  actions: {},
+  modules: {},
 });
-
-export default router;
