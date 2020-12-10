@@ -3,14 +3,15 @@
     <!-- 头部 -->
     <van-nav-bar class="page-nav-bar" title="登录" />
     <!-- 表单 -->
-    <van-form @submit="onSubmit">
+    <van-form @submit="onSubmit" ref="loginForm">
       <!-- 手机号 -->
       <van-field
         type="number"
         maxlength="11"
-        name="手机号"
+        name="mobile"
         placeholder="请输入手机号"
         v-model="user.mobile"
+        :rules="userFormRules.mobile"
       >
         <i slot="left-icon" class="iconfont iconshouji"></i>
       </van-field>
@@ -18,9 +19,10 @@
       <van-field
         type="number"
         maxlength="6"
-        name="验证码"
+        name="code"
         placeholder="请输入验证码"
         v-model="user.code"
+        :rules="userFormRules.code"
       >
         <i slot="left-icon" class="iconfont iconyanzhengma"></i>
         <template #button>
@@ -30,6 +32,7 @@
             round
             size="small"
             type="default"
+            @click="onSendSms"
             >发送验证码</van-button
           >
         </template>
@@ -52,8 +55,30 @@ export default {
   data() {
     return {
       user: {
-        mobile: "13911111113",
-        code: "246810",
+        mobile: "", //13911111113
+        code: "", //246810
+      },
+      userFormRules: {
+        mobile: [
+          {
+            required: true,
+            message: "手机号不能为空",
+          },
+          {
+            pattern: /^1[3578]\d{9}$/,
+            message: "手机号格式错误",
+          },
+        ],
+        code: [
+          {
+            required: true,
+            message: "验证码不能为空",
+          },
+          {
+            pattern: /^\d{6}$/,
+            message: "验证码格式错误",
+          },
+        ],
       },
     };
   },
@@ -85,6 +110,16 @@ export default {
         }
       }
       // 4. 根据响应结果做出对应操作
+    },
+    async onSendSms() {
+      try {
+        // 1. 校验手机号，'mobile' 对应的是 name 属性值
+        await this.$refs.loginForm.validate("mobile");
+        // 2. 验证通过，显示倒计时
+        // 3. 请求发送验证码
+      } catch (err) {
+        return console.log("验证失败", err);
+      }
     },
   },
 };
