@@ -2,13 +2,7 @@
   <div class="login-container">
     <!-- 头部 -->
     <van-nav-bar class="page-nav-bar" title="登录">
-      <!-- 只有传递了 redirect 这样一个参数，才显示返回按钮 -->
-      <van-icon
-        v-if="$route.query.redirect"
-        slot="left"
-        name="cross"
-        @click="$router.back()"
-      />
+      <van-icon slot="left" name="cross" @click="$router.back()" />
     </van-nav-bar>
     <!-- 表单 -->
     <van-form @submit="onSubmit" ref="loginForm">
@@ -69,7 +63,7 @@ export default {
   data() {
     return {
       user: {
-        mobile: "13911111111", // 13911111111
+        mobile: "13911111113", // 13911111113
         code: "246810", // 246810
       },
       userFormRules: {
@@ -99,12 +93,8 @@ export default {
   },
   computed: {},
   watch: {},
-  created() {
-    // console.log(this.$route)
-  },
-  mounted() {
-    console.log(this.$route);
-  },
+  created() {},
+  mounted() {},
   methods: {
     async onSubmit() {
       // 1. 获取表单数据

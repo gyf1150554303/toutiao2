@@ -8,21 +8,40 @@
       </div>
     </div>
     <!-- 已登录 -->
-    <!-- 宫格导航 -->
-    <van-grid :column-num="2" class="grid-nav mb-9" clickable>
-      <van-grid-item class="grid-item">
-        <i slot="icon" class="iconfont iconshoucang"></i>
-        <span slot="text" class="text">收藏</span>
-      </van-grid-item>
-      <van-grid-item class="grid-item">
-        <i slot="icon" class="iconfont iconlishi"></i>
-        <span slot="text" class="text">历史</span>
-      </van-grid-item>
-    </van-grid>
-    <!-- Cell 单元格 -->
-    <van-cell title="消息通知" is-link />
-    <van-cell class="mb-9" title="小智同学" is-link />
-    <van-cell class="logout-cell" clickable title="退出登录" />
+    <div class="header user-info">
+      <div class="base-info">
+        <div class="left">
+          <van-image
+            class="avatar"
+            round
+            fit="cover"
+            src="https://img.yzcdn.cn/vant/cat.jpeg"
+          />
+          <span class="name">黑马头条号</span>
+        </div>
+        <div class="right">
+          <van-button size="mini" round>编辑资料</van-button>
+        </div>
+      </div>
+      <div class="data-stats">
+        <div class="data-item">
+          <span class="count">10</span>
+          <span class="text">头条</span>
+        </div>
+        <div class="data-item">
+          <span class="count">10</span>
+          <span class="text">头条</span>
+        </div>
+        <div class="data-item">
+          <span class="count">10</span>
+          <span class="text">头条</span>
+        </div>
+        <div class="data-item">
+          <span class="count">10</span>
+          <span class="text">头条</span>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -104,13 +123,13 @@ export default {
   .grid-nav {
     .grid-item {
       height: 141px;
-      i.iconfont {
+      i.toutiao {
         font-size: 45px;
       }
-      .iconshoucang {
+      .toutiao-shoucang {
         color: #eb5253;
       }
-      .iconlishi {
+      .toutiao-lishi {
         color: #ff9d1d;
       }
       span.text {
