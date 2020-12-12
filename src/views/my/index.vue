@@ -2,21 +2,27 @@
   <div class="my-container">
     <!-- 未登录头部 -->
     <div class="header not-login">
-      <div
-        class="login-btn"
-        @click="
-          $router.push({
-            name: 'login',
-            query: {
-              redirect: '/my',
-            },
-          })
-        "
-      >
+      <div class="login-btn" @click="$router.push('/login')">
         <img class="mobile-img" src="~@/assets/mobile.png" alt="" />
         <span class="text">登录 / 注册</span>
       </div>
     </div>
+    <!-- 已登录 -->
+    <!-- 宫格导航 -->
+    <van-grid :column-num="2" class="grid-nav mb-9" clickable>
+      <van-grid-item class="grid-item">
+        <i slot="icon" class="iconfont iconshoucang"></i>
+        <span slot="text" class="text">收藏</span>
+      </van-grid-item>
+      <van-grid-item class="grid-item">
+        <i slot="icon" class="iconfont iconlishi"></i>
+        <span slot="text" class="text">历史</span>
+      </van-grid-item>
+    </van-grid>
+    <!-- Cell 单元格 -->
+    <van-cell title="消息通知" is-link />
+    <van-cell class="mb-9" title="小智同学" is-link />
+    <van-cell class="logout-cell" clickable title="退出登录" />
   </div>
 </template>
 
@@ -25,6 +31,7 @@ export default {
   name: "MyIndex",
 };
 </script>
+
 <style lang="less" scoped>
 .my-container {
   .header {
@@ -97,13 +104,13 @@ export default {
   .grid-nav {
     .grid-item {
       height: 141px;
-      i.toutiao {
+      i.iconfont {
         font-size: 45px;
       }
-      .toutiao-shoucang {
+      .iconshoucang {
         color: #eb5253;
       }
-      .toutiao-lishi {
+      .iconlishi {
         color: #ff9d1d;
       }
       span.text {
