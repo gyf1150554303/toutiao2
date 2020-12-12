@@ -4,13 +4,8 @@
     <div v-if="user" class="header user-info">
       <div class="base-info">
         <div class="left">
-          <van-image
-            class="avatar"
-            round
-            fit="cover"
-            src="https://img.yzcdn.cn/vant/cat.jpeg"
-          />
-          <span class="name">黑马头条号</span>
+          <van-image class="avatar" round fit="cover" :src="userInfo.photo" />
+          <span class="name">{{ userInfo.name }}</span>
         </div>
         <div class="right">
           <van-button size="mini" round>编辑资料</van-button>
@@ -18,20 +13,20 @@
       </div>
       <div class="data-stats">
         <div class="data-item">
-          <span class="count">10</span>
+          <span class="count">{{ userInfo.art_count }}</span>
           <span class="text">头条</span>
         </div>
         <div class="data-item">
-          <span class="count">10</span>
-          <span class="text">头条</span>
+          <span class="count">{{ userInfo.follow_count }}</span>
+          <span class="text">关注</span>
         </div>
         <div class="data-item">
-          <span class="count">10</span>
-          <span class="text">头条</span>
+          <span class="count">{{ userInfo.fans_count }}</span>
+          <span class="text">粉丝</span>
         </div>
         <div class="data-item">
-          <span class="count">10</span>
-          <span class="text">头条</span>
+          <span class="count">{{ userInfo.like_count }}</span>
+          <span class="text">获赞</span>
         </div>
       </div>
     </div>
@@ -43,7 +38,7 @@
       </div>
     </div>
     <!-- 宫格导航 -->
-    <van-grid :column-num="2" class="grid-nav" clickable>
+    <van-grid :column-num="2" class="grid-nav mb-9" clickable>
       <van-grid-item class="grid-item">
         <i slot="icon" class="iconfont iconshoucang"></i>
         <span slot="text" class="text">收藏</span>
@@ -56,16 +51,62 @@
     <!-- Cell 单元格 -->
     <van-cell title="消息通知" is-link />
     <van-cell class="mb-9" title="小智同学" is-link />
-    <van-cell v-if="user" class="logout-cell" clickable title="退出登录" />
+    <van-cell
+      v-if="user"
+      class="logout-cell"
+      clickable
+      title="退出登录"
+      @click="onLogout"
+    />
   </div>
 </template>
 
 <script>
 import { mapState } from "vuex";
+import { getUserInfo } from "@/api/user";
 export default {
   name: "MyIndex",
+  data() {
+    return {
+      userInfo: {},
+    };
+  },
   computed: {
     ...mapState(["user"]),
+  },
+  created() {
+    // 如果用户登录了，才需要获取自己的信息
+    if (this.user) {
+      // 例如在此页面用户把 token 清了，再刷新，防止调用接口
+      this.loadUserInfo();
+    }
+    // 在没有登录的情况下，直接调用下面代码，此时访问 http://localhost:8080/#/my，思考为什么没有请求记录产生？
+    // this.loadUserInfo()
+  },
+  methods: {
+    onLogout() {
+      // 提示
+      this.$dialog
+        .confirm({
+          title: "确认退出吗？",
+        })
+        .then(() => {
+          // 确认
+          // 清除登录状态（容器中的 user 和本地的 user）
+          this.$store.commit("setUser", null);
+        })
+        .catch(() => {
+          // 关闭
+        });
+    },
+    async loadUserInfo() {
+      try {
+        const { data } = await getUserInfo();
+        this.userInfo = data.data;
+      } catch (err) {
+        this.$toast("获取数据失败，请稍后重试");
+      }
+    },
   },
 };
 </script>
@@ -142,7 +183,7 @@ export default {
   .grid-nav {
     .grid-item {
       height: 141px;
-      i.toutiao {
+      i.iconfont {
         font-size: 45px;
       }
       .iconshoucang {
