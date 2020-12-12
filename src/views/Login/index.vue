@@ -1,7 +1,15 @@
 <template>
   <div class="login-container">
     <!-- 头部 -->
-    <van-nav-bar class="page-nav-bar" title="登录" />
+    <van-nav-bar class="page-nav-bar" title="登录">
+      <!-- 只有传递了 redirect 这样一个参数，才显示返回按钮 -->
+      <van-icon
+        v-if="$route.query.redirect"
+        slot="left"
+        name="cross"
+        @click="$router.back()"
+      />
+    </van-nav-bar>
     <!-- 表单 -->
     <van-form @submit="onSubmit" ref="loginForm">
       <!-- 手机号 -->
@@ -91,8 +99,12 @@ export default {
   },
   computed: {},
   watch: {},
-  created() {},
-  mounted() {},
+  created() {
+    // console.log(this.$route)
+  },
+  mounted() {
+    console.log(this.$route);
+  },
   methods: {
     async onSubmit() {
       // 1. 获取表单数据
