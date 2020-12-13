@@ -18,8 +18,8 @@
         v-for="channel in channels"
         :key="channel.id"
         :title="channel.name"
-        >{{ channel.name }}的内容</van-tab
-      >
+        ><article-list :channel="channel"></article-list
+      ></van-tab>
       <div slot="nav-right" class="placeholder"></div>
       <div slot="nav-right" class="hamburger-btn">
         <i class="iconfont icongengduo"></i>
@@ -30,8 +30,12 @@
 
 <script>
 import { getUserChannels } from "@/api/user";
+import ArticleList from "./components/article-list";
 export default {
   name: "HomeIndex",
+  components: {
+    ArticleList,
+  },
   data() {
     return {
       active: 0,
