@@ -31,7 +31,7 @@
 
 <script>
 import { getArticles } from "@/api/article";
-import ArticleItem from "./article-item/index";
+import ArticleItem from "@/components/article-item";
 
 export default {
   name: "ArticleList",
