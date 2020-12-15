@@ -3,8 +3,14 @@
     <!-- 我的频道标题 -->
     <van-cell :border="false">
       <div slot="title" class="title-text">我的频道</div>
-      <van-button class="edit-btn" type="danger" plain round size="mini"
-        >编辑</van-button
+      <van-button
+        class="edit-btn"
+        type="danger"
+        plain
+        round
+        size="mini"
+        @click="isEdit = !isEdit"
+        >{{ isEdit ? "完成" : "编辑" }}</van-button
       >
     </van-cell>
     <!-- 我的频道内容 -->
@@ -13,8 +19,12 @@
         class="grid-item"
         v-for="(channel, index) in myChannels"
         :key="index"
-        icon="clear"
       >
+        <van-icon
+          v-show="isEdit && !fixedChannels.includes(channel.id)"
+          slot="icon"
+          name="clear"
+        ></van-icon>
         <!-- 对象中的 key 代表要作用的 css 类名 -->
         <span class="text" slot="text" :class="{ active: index === active }">{{
           channel.name
@@ -56,7 +66,9 @@ export default {
   },
   data() {
     return {
-      allChannels: [], //所有频道
+      allChannels: [], // 所有频道
+      isEdit: false, // 控制编辑状态的显示
+      fixedChannels: [0], // 固定频道，不允许删除
     };
   },
   computed: {
