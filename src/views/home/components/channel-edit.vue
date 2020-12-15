@@ -11,7 +11,7 @@
     <van-grid class="my-grid" :gutter="10">
       <van-grid-item
         class="grid-item"
-        v-for="(value, index) in myChannels"
+        v-for="(channel, index) in myChannels"
         :key="index"
         :text="channel.name"
         icon="clear"
