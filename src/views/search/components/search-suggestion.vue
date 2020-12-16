@@ -48,8 +48,23 @@ export default {
         this.$toast("数据获取失败，请稍后重试");
       }
     },
+    highlight(text) {
+      // eslint-disable-next-line no-eval
+      // return texst.replace(eval('/' + this.searchText + '/gi'), `<span class="active">${this.searchText}</span>`)
+      const reg = new RegExp(this.searchText, "gi");
+      return text.replace(
+        reg,
+        `<span class="active">${this.searchText}</span>`
+      );
+    },
   },
 };
 </script>
 
-<style lang="less" scoped></style>
+<style lang="less" scoped>
+.search-suggestion {
+  /deep/span.active {
+    color: #3296fa;
+  }
+}
+</style>
