@@ -5,6 +5,7 @@
       icon="search"
       v-for="(text, index) in suggestions"
       :key="index"
+      @click="$emit('search', text)"
     ></van-cell>
   </div>
 </template>
