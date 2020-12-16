@@ -75,7 +75,7 @@ export default {
     return {
       allChannels: [], // 所有频道
       isEdit: false, // 控制编辑状态的显示
-      fixedChannels: [0], // 固定频道，不允许删除
+      fixedChannels: [0, 11], // 固定频道，不允许删除
     };
   },
   computed: {
