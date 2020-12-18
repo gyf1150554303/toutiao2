@@ -8,3 +8,12 @@ export const getArticles = (params) => {
     params,
   });
 };
+
+// 获取文章详情
+export const getArticleById = (articleId) => {
+  return request({
+    method: "GET",
+    // 注意这里是 v1_0!!!
+    url: `/app/v1_0/articles/${articleId}`,
+  });
+};
