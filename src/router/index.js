@@ -45,6 +45,7 @@ const routes = [
     path: "/article/:articleId",
     name: "article",
     component: () => import("@/views/article"),
+    props: true, // 开启 props 传参，把路由参数映射到组件的 props 数据中
   },
 ];
 
