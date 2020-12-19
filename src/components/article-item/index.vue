@@ -8,8 +8,8 @@
       name: 'article',
       // 传递参数，属性名要求是配置路由时路径中指定的名称，path: '/article/:articleId',
       params: {
-        articleId: article.art_id,
-      },
+        articleId: article.art_id
+      }
     }"
   >
     <div slot="title" class="title van-multi-ellipsis--l2">
@@ -49,9 +49,9 @@ export default {
   props: {
     article: {
       type: Object,
-      required: true,
-    },
-  },
+      required: true
+    }
+  }
 };
 </script>
 
@@ -61,31 +61,27 @@ export default {
     font-size: 32px;
     color: #3a3a3a;
   }
-
-  .van-cell_title {
+  .van-cell__title {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
   }
-  //右侧的一张图片
-  .van-cell_value {
+  // 右侧的一张图片
+  .van-cell__value {
     flex: unset;
     width: 232px;
     height: 146px;
     padding-left: 25px;
   }
-
   .right-cover {
     width: 100%;
     height: 146px;
   }
-
   .label-info-wrap span {
     font-size: 22px;
     color: #b4b4b4;
     margin-right: 25px;
   }
-
   .cover-wrap {
     display: flex;
     padding: 30px 0;
