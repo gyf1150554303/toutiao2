@@ -98,14 +98,14 @@ export default {
   props: {
     articleId: {
       type: [Number, String, Object],
-      required: true,
-    },
+      required: true
+    }
   },
   data() {
     return {
       article: {}, // 文章详情
       loading: true, // 加载中的状态
-      errStatus: 0, // 失败的状态码
+      errStatus: 0 // 失败的状态码
     };
   },
   computed: {},
@@ -148,12 +148,12 @@ export default {
         img.onclick = function() {
           ImagePreview({
             images,
-            startPosition: index,
+            startPosition: index
           });
         };
       });
-    },
-  },
+    }
+  }
 };
 </script>
 
