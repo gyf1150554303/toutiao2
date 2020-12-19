@@ -35,6 +35,7 @@
             class="follow-btn"
             round
             size="small"
+            @click="onFollow"
             >已关注</van-button
           >
           <van-button
@@ -45,6 +46,7 @@
             round
             size="small"
             icon="plus"
+            @click="onFollow"
             >关注</van-button
           >
           <!-- <van-button
@@ -99,6 +101,7 @@
 <script>
 import { getArticleById } from "@/api/article";
 import { ImagePreview } from "vant";
+import { addFollow, deleteFollow } from "@/api/user";
 // 测试 => http://localhost:8080/#/article/140911
 export default {
   name: "ArticleIndex",
@@ -160,6 +163,26 @@ export default {
           });
         };
       });
+    },
+    async onFollow() {
+      try {
+        if (this.article.is_followed) {
+          // 已关注，取消关注
+          await deleteFollow(this.article.aut_id);
+        } else {
+          // 没有关注，添加关注
+          await addFollow(this.article.aut_id);
+        }
+        // 更新视图状态
+        this.article.is_followed = !this.article.is_followed;
+      } catch (err) {
+        let message = "操作失败，请重试！";
+        // 例如用户关注自己会报错
+        if (err.response && err.response.status === 400) {
+          message = "你不能关注你自己！";
+        }
+        this.$toast(message);
+      }
     }
   }
 };
