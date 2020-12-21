@@ -7,6 +7,12 @@
 <script>
 export default {
   name: "CommentReply",
+  props: {
+    comment: {
+      type: Object,
+      required: true
+    }
+  },
   data() {
     return {};
   },
