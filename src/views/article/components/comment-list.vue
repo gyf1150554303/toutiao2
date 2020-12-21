@@ -29,11 +29,15 @@ export default {
     source: {
       type: [Number, String, Object],
       required: true
+    },
+    list: {
+      type: Array,
+      default: () => [] // 对象给默认值要以函数返回值的方式
     }
   },
   data() {
     return {
-      list: [],
+      // list: [],
       loading: false,
       finished: false,
       offset: null, // 获取下一页数据的标记
@@ -51,7 +55,7 @@ export default {
         // 1. 请求数据
         const { data } = await getComments({
           type: "a", // 评论类型，a 代表对文章的评论
-          source: this.source, // 源 id，文章 id 或评论 id
+          source: this.source.toString(), // 源 id，文章 id 或评论 id
           offset: this.offset,
           limit: this.limit // 获取的个数
         });
