@@ -8,7 +8,7 @@
           <span class="name">{{ userInfo.name }}</span>
         </div>
         <div class="right">
-          <van-button size="mini" round>编辑资料</van-button>
+          <van-button size="mini" round to="/user/profile">编辑资料</van-button>
         </div>
       </div>
       <div class="data-stats">
@@ -68,11 +68,11 @@ export default {
   name: "MyIndex",
   data() {
     return {
-      userInfo: {},
+      userInfo: {}
     };
   },
   computed: {
-    ...mapState(["user"]),
+    ...mapState(["user"])
   },
   created() {
     // 如果用户登录了，才需要获取自己的信息
@@ -88,7 +88,7 @@ export default {
       // 提示
       this.$dialog
         .confirm({
-          title: "确认退出吗？",
+          title: "确认退出吗？"
         })
         .then(() => {
           // 确认
@@ -106,8 +106,8 @@ export default {
       } catch (err) {
         this.$toast("获取数据失败，请稍后重试");
       }
-    },
-  },
+    }
+  }
 };
 </script>
 
