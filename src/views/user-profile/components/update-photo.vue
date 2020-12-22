@@ -9,6 +9,8 @@
 </template>
 
 <script>
+import "cropperjs/dist/cropper.css";
+import Cropper from "cropperjs";
 export default {
   name: "UpdatePhoto",
   props: {
@@ -19,6 +21,16 @@ export default {
   },
   data() {
     return {};
+  },
+  mounted() {
+    const image = this.$refs.img;
+    this.cropper = new Cropper(image, {
+      aspectRatio: 16 / 9,
+      crop(event) {
+        console.log(event, detail.x);
+        console.log(event, detail.width);
+      }
+    });
   },
   methods: {}
 };
