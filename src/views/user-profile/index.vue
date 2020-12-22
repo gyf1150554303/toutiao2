@@ -28,7 +28,7 @@
       title="生日"
       :value="user.birthday"
       is-link
-      @click="isUpdateBirthdatShow = true"
+      @click="isUpdateBirthdayShow = true"
     />
     <!-- /个人信息 -->
     <!-- 编辑昵称 -->
@@ -107,7 +107,6 @@ export default {
     width: 60px;
     height: 60px;
   }
-
   .van-popup {
     background-color: #f5f7f9;
   }
