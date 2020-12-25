@@ -9,7 +9,7 @@ export const setItem = (key, value) => {
 };
 
 // 取
-export const getItem = (key) => {
+export const getItem = key => {
   const data = localStorage.getItem(key);
   try {
     return JSON.parse(data);
@@ -19,6 +19,6 @@ export const getItem = (key) => {
 };
 
 // 删
-export const removeItem = (key) => {
+export const removeItem = key => {
   localStorage.removeItem(key);
 };

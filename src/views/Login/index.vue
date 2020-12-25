@@ -64,31 +64,31 @@ export default {
     return {
       user: {
         mobile: "13911111113", // 13911111113
-        code: "246810", // 246810
+        code: "246810" // 246810
       },
       userFormRules: {
         mobile: [
           {
             required: true,
-            message: "手机号不能为空",
+            message: "手机号不能为空"
           },
           {
             pattern: /^1[3578]\d{9}$/,
-            message: "手机号格式错误",
-          },
+            message: "手机号格式错误"
+          }
         ],
         code: [
           {
             required: true,
-            message: "验证码不能为空",
+            message: "验证码不能为空"
           },
           {
             pattern: /^\d{6}$/,
-            message: "验证码格式错误",
-          },
-        ],
+            message: "验证码格式错误"
+          }
+        ]
       },
-      isCountDownShow: false, // 是否展示倒计时
+      isCountDownShow: false // 是否展示倒计时
     };
   },
   computed: {},
@@ -104,7 +104,7 @@ export default {
       this.$toast.loading({
         message: "登陆中...",
         forbidClick: true,
-        duration: 0,
+        duration: 0
       });
       try {
         const { data } = await login(user);
@@ -112,7 +112,10 @@ export default {
         this.$store.commit("setUser", data.data);
         this.$toast.success("登录成功");
         //跳转回原来的页面
-        this.$router.back();
+        // this.$router.back()
+        // 所有跳转到登录页都要求带一个 redirect 参数
+        // 目的是登录成功后还是跳转到来的地方
+        this.$router.push(this.$route.query.redirect || "/");
       } catch (err) {
         if (err.response.status === 400) {
           this.$toast.fail("手机号或验证码错误");
@@ -143,8 +146,8 @@ export default {
           this.$toast("发送失败，请稍后重试");
         }
       }
-    },
-  },
+    }
+  }
 };
 </script>
 
